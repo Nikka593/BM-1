@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintUP第1回BM会議アンケート結果</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;700&family=Yomogi&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ui-color-1: #1B6C8C;
+            --ui-color-2: #BF8136;
+            --ui-color-3: #F2E8E4;
+            --ui-color-4: #260101;
+            --ui-color-5: #BF5656;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #FFF8F5;
+            font-family: 'Kaisei Decol', serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: auto;
+        }
+
+        .main-container {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ヘッダー */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--ui-color-1), var(--ui-color-2));
+            border-radius: 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .header-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fa-bounce 2s infinite;
+        }
+
+        .header-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ナビゲーションボタン */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: linear-gradient(45deg, var(--ui-color-1), var(--ui-color-2));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-button.active {
+            background: linear-gradient(45deg, var(--ui-color-5), var(--ui-color-2));
+            animation: pulse-button 1s ease-in-out;
+        }
+
+        .nav-button i {
+            margin-right: 8px;
+        }
+
+        @keyframes pulse-button {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ページコンテンツ */
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* レイアウト */
+        .section-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        /* カード */
+        .section-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 450px;
+            background-color: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.12);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 30px rgba(0,0,0,0.18);
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ui-color-1), var(--ui-color-2));
+        }
+
+        .fade-in-scale {
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* アイコンコンテナ */
+        .mega-icon-container {
+            text-align: center;
+            margin: 20px 0 25px;
+        }
+
+        .mega-icon-container i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .mega-icon-container h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* カードコンテンツ */
+        .card-content {
+            padding: 0 10px 20px;
+        }
+
+        /* キーワードリスト */
+        .keyword-list {
+            margin: 20px 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .keyword-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .keyword-list li:hover {
+            background-color: rgba(242, 231, 227, 0.3);
+        }
+
+        .keyword-list li i {
+            margin-right: 10px;
+            color: var(--ui-color-2);
+            min-width: 20px;
+            margin-top: 2px;
+        }
+
+        /* キーワードタグ */
+        .keyword-tag {
+            background-color: var(--ui-color-3);
+            color: var(--ui-color-4);
+            padding: 4px 10px;
+            border-radius: 8px;
+            margin: 0 5px 5px 0;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* 引用ボックス */
+        .quote-box {
+            background: linear-gradient(135deg, #f8f9fa, var(--ui-color-3));
+            border-left: 4px solid var(--ui-color-1);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--ui-color-1);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.3;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        /* 吹き出し */
+        .speech-bubble {
+            position: relative;
+            background: #fff;
+            border: 3px solid var(--ui-color-1);
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin: 20px 5px;
+            font-family: 'Yomogi', cursive;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transform: rotate(-1deg);
+            animation: wiggle 0.5s ease-in-out;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            25% { transform: rotate(1deg); }
+            75% { transform: rotate(-0.5deg); }
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 25px;
+            border-width: 14px 10px 0;
+            border-style: solid;
+            border-color: var(--ui-color-1) transparent;
+            display: block;
+            width: 0;
+        }
+
+        .speech-bubble.right::after {
+            left: auto;
+            right: 25px;
+            transform: rotate(15deg);
+        }
+
+        .speech-bubble.top::after {
+            bottom: auto;
+            top: -15px;
+            border-width: 0 10px 14px;
+            transform: rotate(-5deg);
+        }
+
+        .speech-bubble.variant-1 {
+            background: #FFF9E3;
+            border-color: var(--ui-color-2);
+            transform: rotate(1deg);
+        }
+
+        .speech-bubble.variant-1::after {
+            border-color: var(--ui-color-2) transparent;
+        }
+
+        .speech-bubble.variant-2 {
+            background: #FFE9E9;
+            border-color: var(--ui-color-5);
+            transform: rotate(-2deg);
+        }
+
+        .speech-bubble.variant-2::after {
+            border-color: var(--ui-color-5) transparent;
+        }
+
+        .handwritten {
+            font-family: 'Yomogi', cursive;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 統計カード */
+        .stats-card {
+            background: linear-gradient(135deg, var(--ui-color-3), #fff);
+            border: 2px solid var(--ui-color-2);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ui-color-1);
+            margin-bottom: 8px;
+        }
+
+        .stats-label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* 企業カード */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .company-tag {
+            background: linear-gradient(45deg, var(--ui-color-1), var(--ui-color-2));
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* 詳細ページ用スタイル */
+        .detail-section {
+            margin-bottom: 40px;
+        }
+
+        .detail-header {
+            background: linear-gradient(45deg, var(--ui-color-1), var(--ui-color-2));
+            color: white;
+            padding: 20px;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+        }
+
+        .detail-content {
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .response-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid var(--ui-color-2);
+        }
+
+        .response-company {
+            font-weight: bold;
+            color: var(--ui-color-1);
+            margin-bottom: 5px;
+        }
+
+        .response-text {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 1200px) {
+            .section-card {
+                min-width: 320px;
+            }
+            .header-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .section-card {
+                min-width: 380px;
+            }
+            .header-title {
+                font-size: 2rem;
+            }
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-button {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-layout {
+                flex-direction: column;
+            }
+            .section-card {
+                width: 100%;
+                min-width: auto;
+            }
+            .header-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- ヘッダー -->
+        <div class="header">
+            <i class="fas fa-users-gear header-icon"></i>
+            <h1 class="header-title">PintUP第1回BM会議</h1>
+            <p class="header-subtitle">アンケート結果 グラフィックレコーディング</p>
+            <p class="header-subtitle">2025年5月29日実施</p>
+        </div>
+
+        <!-- ナビゲーション -->
+        <div class="navigation">
+            <button class="nav-button active" onclick="showPage('overview')">
+                <i class="fas fa-chart-pie"></i>概要・サマリー
+            </button>
+            <button class="nav-button" onclick="showPage('sales-detail')">
+                <i class="fas fa-chart-line"></i>セールス詳細
+            </button>
+            <button class="nav-button" onclick="showPage('service-detail')">
+                <i class="fas fa-hands-helping"></i>サービス詳細
+            </button>
+            <button class="nav-button" onclick="showPage('voices')">
+                <i class="fas fa-comments"></i>生の声・回答集
+            </button>
+        </div>
+
+        <!-- 概要ページ -->
+        <div id="overview" class="page-content active">
+            <!-- 第1セクション：会議概要 -->
+            <div class="section-layout">
+                <div class="section-card fade-in-scale stats-card">
+                    <div class="mega-icon-container">
+                        <i class="fas fa-building" style="color: var(--ui-color-1);"></i>
+                        <h2>参加企業</h2>
+                    </div>
+                    <div class="stats-number">25+</div>
+                    <div class="stats-label">社が参加</div>
+                    <div class="speech-bubble variant-1 top">
+                        <span class="handwritten">
+                            <i class="fas fa-handshake"></i>
+                            多様な企業が集結！<br>
+                            協力体制を構築
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-card fade-in-scale stats-card">
+                    <div class="mega-icon-container">
+                        <i class="fas fa-clipboard-question" style="color: var(--ui-color-2);"></i>
+                        <h2>アンケート項目</h2>
+                    </div>
+                    <div class="stats-number">30+</div>
+                    <div class="stats-label">の質問項目</div>
+                    <div class="speech-bubble variant-2">
+                        <span class="handwritten">
+                            <i class="fas fa-chart-line"></i>
+                            セールス・サービス<br>
+                            両部門を詳細調査
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第2セクション：セールス部門 -->
+            <div class="section-layout">
+                <div class="section-card fade-in-scale">
+                    <div class="mega-icon-container">
+                        <i class="fas fa-chart-simple" style="color: var(--ui-color-1); animation: fa-beat-fade 2s infinite;"></i>
+                        <h2>セールス部門の取り組み</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul class="keyword-list">
+                            <li>
+                                <i class="fas fa-bullseye"></i>
+                                <span><span class="keyword-tag">アポ率向上</span>の具体的アクション</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-store"></i>
+                                <span><span class="keyword-tag">来店率向上</span>策の実践</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-chart-line"></i>
+                                <span><span class="keyword-tag">測定数向上</span>のイメージ化</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-dumbbell"></i>
+                                <span><span class="keyword-tag">メニュー体験</span>の最適化</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-users"></i>
+                                <span><span class="keyword-tag">ロープレ</span>スキル向上計画</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="speech-bubble">
+                        <span class="handwritten">
+                            <i class="fas fa-lightbulb"></i>
+                            参加者全員が<br>
+                            <span class="keyword-tag">「イメージついた」</span><br>
+                            と回答！
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-card fade-in-scale">
+                    <div class="mega-icon-container">
+                        <i class="fas fa-clipboard-list" style="color: var(--ui-color-2); animation: fa-flip 3s infinite;"></i>
+                        <h2>具体的アクション例</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul class="keyword-list">
+                            <li>
+                                <i class="fas fa-calendar-day"></i>
+                                <span>3日以内アポの徹底</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-pointing-hand"></i>
+                                <span>指差しと声掛けの強化</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-tablet"></i>
+                                <span>iPadを活用した姿勢チェック</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-gift"></i>
+                                <span>抽選会で興味喚起</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-handshake"></i>
+                                <span>ボディタッチの最適化</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-microphone"></i>
+                                <span>朝昼のロープレ実践</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="speech-bubble right variant-1">
+                        <span class="handwritten">
+                            <i class="fas fa-star"></i>
+                            実践的な<br>
+                            ノウハウが満載！
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第3セクション：サービス部門 -->
+            <div class="section-layout">
+                <div class="section-card fade-in-scale">
+                    <div class="mega-icon-container">
+                        <i class="fas fa-hands-helping" style="color: var(--ui-color-5); animation: fa-bounce 2s infinite;"></i>
+                        <h2>サービス部門の重点項目</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul class="keyword-list">
+                            <li>
+                                <i class="fas fa-heart"></i>
+                                <span><span class="keyword-tag">お腹の力</span>サポート技術</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-trophy"></i>
+                                <span><span class="keyword-tag">チャレンジハード</span>の指導法</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-book"></i>
+                                <span><span class="keyword-tag">マイマニュアル</span>作成実践</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-user-check"></i>
+                                <span>コーチの動き方最適化</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="speech-bubble variant-2">
+                        <span class="handwritten">
+                            <i class="fas fa-graduation-cap"></i>
+                            体感しながらの<br>
+                            学習で腹落ち！
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-card fade-in-scale">
+                    <div class="mega-icon-container">
+                        <i class="fas fa-fire" style="color: var(--ui-color-2); animation: fa-beat 1.5s infinite;"></i>
+                        <h2>夏キャンペーン意気込み</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul class="keyword-list">
+                            <li>
+                                <i class="fas fa-percentage"></i>
+                                <span>成約率60%を目指す</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-users-line"></i>
+                                <span>会員数増加の推進</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-medal"></i>
+                                <span>純増1位への挑戦</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-rocket"></i>
+                                <span>チーム一丸での取り組み</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="speech-bubble top variant-1">
+                        <span class="handwritten">
+                            <i class="fas fa-sun"></i>
+                            夏キャンペーンで<br>
+                            <span class="keyword-tag">大きな成果</span>を！
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第4セクション：参加企業一覧 -->
+            <div class="section-layout">
+                <div class="section-card fade-in-scale" style="flex: 1; min-width: 100%;">
+                    <div class="mega-icon-container">
+                        <i class="fas fa-building-user" style="color: var(--ui-color-2); animation: fa-beat 2s infinite;"></i>
+                        <h2>参加企業一覧</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="company-grid">
+                            <div class="company-tag">株式会社クリエイティブサポートC</div>
+                            <div class="company-tag">株式会社シャポンドゥ</div>
+                            <div class="company-tag">株式会社キートス</div>
+                            <div class="company-tag">株式会社エクスティード</div>
+                            <div class="company-tag">ヨネダホールディング</div>
+                            <div class="company-tag">有限会社紅屋</div>
+                            <div class="company-tag">株式会社MYパーティーズ</div>
+                            <div class="company-tag">株式会社G7リテールジャパン</div>
+                            <div class="company-tag">株式会社クーバルウエルケア</div>
+                            <div class="company-tag">モリススマイル株式会社</div>
+                            <div class="company-tag">株式会社井上</div>
+                            <div class="company-tag">ウィン株式会社</div>
+                            <div class="company-tag">ハヤシシルク株式会社</div>
+                            <div class="company-tag">株式会社三鮮商事</div>
+                            <div class="company-tag">アルフォンソ株式会社</div>
+                            <div class="company-tag">株式会社東山</div>
+                            <div class="company-tag">ホンダカーズ佐賀</div>
+                            <div class="company-tag">株式会社アドバンス</div>
+                            <div class="company-tag">株式会社志水商店</div>
+                            <div class="company-tag">アピタ富山東店</div>
+                            <div class="company-tag">イオンモール京都五条</div>
+                        </div>
+                    </div>
+                    <div class="speech-bubble variant-1 top">
+                        <span class="handwritten">
+                            <i class="fas fa-network-wired"></i>
+                            多種多様な業界から<br>
+                            <span class="keyword-tag">大結集</span>！<br>
+                            協力体制で成功へ
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- セールス詳細ページ -->
+        <div id="sales-detail" class="page-content">
+            <div class="detail-section">
+                <div class="detail-header">
+                    <i class="fas fa-chart-line fa-3x"></i>
+                    <h2>セールス部門 - 詳細回答分析</h2>
+                </div>
+                <div class="detail-content">
+                    <div class="section-layout">
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-calendar-check" style="color: var(--ui-color-1); animation: fa-beat-fade 2s infinite;"></i>
+                                <h2>アポ率向上の具体策</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">クリエイティブサポートC</div>
+                                    <div class="response-text">「もう引きましたから体を入れ替えてトーク続ける」「午前、午後の選択式で聞くことでよりゲストさんが生活イメージをつけやすいようにする」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">シャポンドゥ</div>
+                                    <div class="response-text">「主導権を持って選択式」で進める</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">キートス</div>
+                                    <div class="response-text">「改めて指さしや声掛けのタイミング等の基本に立ち返ってロープレをしていきたい」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">エクスティード</div>
+                                    <div class="response-text">「ツールを目線に合わせて行く」「声掛けと指差し、iPadで自分の姿勢を見せて危機感を伝える」</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-1">
+                                <span class="handwritten">
+                                    <i class="fas fa-target"></i>
+                                    選択式トークと<br>
+                                    <span class="keyword-tag">視覚的アプローチ</span><br>
+                                    がポイント！
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-store" style="color: var(--ui-color-2); animation: fa-flip 3s infinite;"></i>
+                                <h2>来店率向上策</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">クリエイティブサポートC</div>
+                                    <div class="response-text">「早得キャンペーンで3日以内アポにこだわる」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">シャポンドゥ</div>
+                                    <div class="response-text">「ワクワク感をもつ 3日以内アポ」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">キートス</div>
+                                    <div class="response-text">「早得キャンペーンツールをトーク通りに行う」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">エクスティード</div>
+                                    <div class="response-text">「3日以内に主導権を持って予約日を取る。楽しみな事不安な事を聞いてワクワク楽しみな状態を作る」</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-2 right">
+                                <span class="handwritten">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="keyword-tag">3日以内</span>が<br>
+                                    キーワード！<br>
+                                    ワクワク感も重要
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-layout">
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-dumbbell" style="color: var(--ui-color-5); animation: fa-bounce 2s infinite;"></i>
+                                <h2>メニュー体験の改善点</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">ハム体験</div>
+                                    <div class="response-text">「お尻を引く時自分の思ってるより強く引く」「ボディタッチの強さ、承認もれなく」「骨盤矯正、はっきり動かす」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">ソラシックA（ボール）</div>
+                                    <div class="response-text">「ボールの位置」「腰をしっかりベッドにつけてもらう、承認トーンあげる」「少しゆっくり目に、トーンダウンして進める」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">ソラシックB（チューブ）</div>
+                                    <div class="response-text">「肩甲骨の間触る時に強く」「背骨をおさえてグリグリするところ、骨盤立てる」「反らす丸めるを大きく」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">ウォーターボール</div>
+                                    <div class="response-text">「ボディタッチ手のひらで」「脇を閉めて早く振る」「お腹に力を入れて骨盤を立てる」</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-fire" style="color: var(--ui-color-1); animation: fa-beat 1.5s infinite;"></i>
+                                <h2>今後の意気込み</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="quote-box">
+                                    「夏キャンペーンまずは成約率UP目指します！」
+                                    <div class="quote-author">- クリエイティブサポートC</div>
+                                </div>
+                                <div class="quote-box">
+                                    「FAはオープン当初以来となるので会員数増やせるようロープレ行う」
+                                    <div class="quote-author">- エクスティード</div>
+                                </div>
+                                <div class="quote-box">
+                                    「メニュー体験で細かく教わったことを自クラブのコーチにも伝えて、そこを重点的にトレーニング。そしてアフターAを出す」
+                                    <div class="quote-author">- シャポンドゥ</div>
+                                </div>
+                                <div class="quote-box">
+                                    「チーム戦になるのでしっかり他企業さんも頼って全員で協力して頑張りたい」
+                                    <div class="quote-author">- クリエイティブサポートC</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- サービス詳細ページ -->
+        <div id="service-detail" class="page-content">
+            <div class="detail-section">
+                <div class="detail-header">
+                    <i class="fas fa-hands-helping fa-3x"></i>
+                    <h2>サービス部門 - 詳細回答分析</h2>
+                </div>
+                <div class="detail-content">
+                    <div class="section-layout">
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-heart" style="color: var(--ui-color-5); animation: fa-beat-fade 2s infinite;"></i>
+                                <h2>お腹の力サポート技術</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">井上</div>
+                                    <div class="response-text">「お客様により分かりやすく伝える為に、実際に骨盤を触っていただき体感していただく」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">ウィン</div>
+                                    <div class="response-text">「お腹に力を入れる前に肋骨を下げることを意識する」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">アピタ富山東店</div>
+                                    <div class="response-text">「骨盤を立てるサポートで、手のひらで押してあげる」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">ホンダカーズ佐賀</div>
+                                    <div class="response-text">「骨盤をたてる」「腰をベッドにつけてもらう」「お腹に力を入れて骨盤を立てる」</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-1">
+                                <span class="handwritten">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    <span class="keyword-tag">体感型指導</span>で<br>
+                                    理解度アップ！
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-trophy" style="color: var(--ui-color-2); animation: fa-flip 3s infinite;"></i>
+                                <h2>チャレンジハードサポート</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">アドバンス</div>
+                                    <div class="response-text">「お客様の体力に合わせて進めていく」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">東山</div>
+                                    <div class="response-text">「思っている以上に強めのサポート」「少しゆっくり目に、トーンダウンして進める」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">モリススマイル</div>
+                                    <div class="response-text">「しっかりとサポートしていく。声掛けをもっと多く行う」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">エクスティード</div>
+                                    <div class="response-text">「ボディタッチの股関節の触る位置や、背中と腰の触る位置が一緒にならないよう特に意識する」</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-2 right">
+                                <span class="handwritten">
+                                    <i class="fas fa-muscle"></i>
+                                    個人の体力に合わせた<br>
+                                    <span class="keyword-tag">きめ細かい対応</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-layout">
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-book" style="color: var(--ui-color-1); animation: fa-bounce 2s infinite;"></i>
+                                <h2>マイマニュアル作成実践</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">クーバルウエルケア</div>
+                                    <div class="response-text">「コーチごとに意識できるポイントが違うので、それぞれが気をつけるべきポイントをまとめて意識していく」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">クリエイティブサポートC</div>
+                                    <div class="response-text">「メニュー体験のカラオケ・相互ロープレを昼礼後」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">エクスティード</div>
+                                    <div class="response-text">「朝と昼メニューロープレ2回ずつ」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">志水商店</div>
+                                    <div class="response-text">「目標を意識して取り組んでいく。そしてできないことはできるまで繰り返し練習する」</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-fire" style="color: var(--ui-color-5); animation: fa-beat 1.5s infinite;"></i>
+                                <h2>夏キャンペーン意気込み</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="quote-box">
+                                    「入会率60%を目指す」
+                                    <div class="quote-author">- ヨネダHD</div>
+                                </div>
+                                <div class="quote-box">
+                                    「まずは夏キャンを成功させるためにクラブやチームで共有をして純増一位を目指します」
+                                    <div class="quote-author">- エクスティード</div>
+                                </div>
+                                <div class="quote-box">
+                                    「BM会議で得た事を実践して成約率上げる」
+                                    <div class="quote-author">- 東山</div>
+                                </div>
+                                <div class="quote-box">
+                                    「チームでの純増目標にも向かってクラブ一丸となって頑張っていきます！」
+                                    <div class="quote-author">- ヨネダHD</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 生の声ページ -->
+        <div id="voices" class="page-content">
+            <div class="detail-section">
+                <div class="detail-header">
+                    <i class="fas fa-comments fa-3x"></i>
+                    <h2>参加者の生の声・回答集</h2>
+                </div>
+                <div class="detail-content">
+                    <div class="section-layout">
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-heart" style="color: var(--ui-color-1); animation: fa-beat-fade 2s infinite;"></i>
+                                <h2>他社連携への期待</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="quote-box">
+                                    「リーダーロープレや差し入れ」
+                                    <div class="quote-author">- クリエイティブサポートC</div>
+                                </div>
+                                <div class="quote-box">
+                                    「カーブスとは違いまだまだ成功ノウハウが発展途上だと思うので、他店の工夫している各施策の成功共有があると楽しみ」
+                                    <div class="quote-author">- キートス</div>
+                                </div>
+                                <div class="quote-box">
+                                    「他チームとFAの気付きを共有し合う時間を取りたい」
+                                    <div class="quote-author">- エクスティード</div>
+                                </div>
+                                <div class="quote-box">
+                                    「週に一度のWEB会議で活動の共有」
+                                    <div class="quote-author">- エクスティード</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-1">
+                                <span class="handwritten">
+                                    <i class="fas fa-users"></i>
+                                    <span class="keyword-tag">ノウハウ共有</span>への<br>
+                                    強い期待感！
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-star" style="color: var(--ui-color-2); animation: fa-flip 3s infinite;"></i>
+                                <h2>BM会議の感想</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="quote-box">
+                                    「実践が多くあり、コーチのイメージがついたと思う」
+                                    <div class="quote-author">- クリエイティブサポートC</div>
+                                </div>
+                                <div class="quote-box">
+                                    「他企業さんとロープレすることでよりロープレの質が高まった。全国各地が集まって一体化になった感じがした」
+                                    <div class="quote-author">- シャポンドゥ</div>
+                                </div>
+                                <div class="quote-box">
+                                    「体感しながらのロープレだったので、しっかり腹落ちしながら学ぶことが出来た」
+                                    <div class="quote-author">- キートス</div>
+                                </div>
+                                <div class="quote-box">
+                                    「他企業の方とロープレをする時間があったので今までになかったFBなどをいただけてとても学びが多かった」
+                                    <div class="quote-author">- クリエイティブサポートC</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-2 right">
+                                <span class="handwritten">
+                                    <i class="fas fa-lightbulb"></i>
+                                    実践重視で<br>
+                                    <span class="keyword-tag">腹落ち感</span>抜群！
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-layout">
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-chart-line" style="color: var(--ui-color-5); animation: fa-bounce 2s infinite;"></i>
+                                <h2>スキルアップ計画</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">クリエイティブサポートC</div>
+                                    <div class="response-text">「米川と朝と昼ロープレ行う」「自社のコーチとロープレ2回」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">エクスティード</div>
+                                    <div class="response-text">「さおりコーチと朝のロープレ、メニュー」「朝と昼メニューロープレ2回ずつ」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">ヨネダHD</div>
+                                    <div class="response-text">「空いてる時間で口慣れするまでロープレ」「メニュー体験のカラオケ・相互ロープレを昼礼後」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">キートス</div>
+                                    <div class="response-text">「2番手のコーチも同じレベル感でメニュー体験ができるように、お店でもメニュー体験のトレーニングから行っていく」</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section-card fade-in-scale">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-exclamation-triangle" style="color: var(--ui-color-2); animation: fa-beat 1.5s infinite;"></i>
+                                <h2>改善ポイント・課題</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="response-item">
+                                    <div class="response-company">ロープレでの課題</div>
+                                    <div class="response-text">「ボディタッチが少し弱い」「承認もれ」「ボディタッチもっと多く。遠慮してしまう」「口慣れしてない」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">メニュー体験での課題</div>
+                                    <div class="response-text">「ハムでサポートに精一杯になってしまって承認もれがあった」「骨盤矯正 早かった」「体幹パート 悪い見本といい見本を極端に見せる事」</div>
+                                </div>
+                                <div class="response-item">
+                                    <div class="response-company">今後の対策</div>
+                                    <div class="response-text">「ハムの際に背中に手を当てるべきタイミングで腰に寄ってしまったので、曖昧にならないよう意識します」</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-1 top">
+                                <span class="handwritten">
+                                    <i class="fas fa-tools"></i>
+                                    課題を明確化して<br>
+                                    <span class="keyword-tag">継続改善</span>！
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-layout">
+                        <div class="section-card fade-in-scale" style="flex: 1; min-width: 100%;">
+                            <div class="mega-icon-container">
+                                <i class="fas fa-rocket" style="color: var(--ui-color-1); animation: fa-bounce 2s infinite;"></i>
+                                <h2>最終メッセージ集</h2>
+                            </div>
+                            <div class="card-content">
+                                <div class="quote-box">
+                                    「今日は第一回BM会議に参加できて、とても光栄でした！準備など、本当にありがとうございます！」
+                                    <div class="quote-author">- クリエイティブサポートC</div>
+                                </div>
+                                <div class="quote-box">
+                                    「ここからサービス、セールス、ゲスプロと全ての質を高めて、しっかり純増できるお店作りをしていく」
+                                    <div class="quote-author">- キートス</div>
+                                </div>
+                                <div class="quote-box">
+                                    「各活動のノウハウをしっかり吸収でき、他社さんとロープレや交流ができて新しい発見がありとてもいい学びになりました」
+                                    <div class="quote-author">- エクスティード</div>
+                                </div>
+                                <div class="quote-box">
+                                    「他企業の方からアドバイスを貰える貴重な機会でした！」
+                                    <div class="quote-author">- ヨネダHD</div>
+                                </div>
+                            </div>
+                            <div class="speech-bubble variant-2 top">
+                                <span class="handwritten">
+                                    <i class="fas fa-heart"></i>
+                                    感謝の気持ちと<br>
+                                    <span class="keyword-tag">強い決意</span>が<br>
+                                    伝わってくる！
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // 全てのページを非表示
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 全てのボタンのactiveクラスを削除
+            const buttons = document.querySelectorAll('.nav-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // 指定されたページを表示
+            document.getElementById(pageId).classList.add('active');
+
+            // 対応するボタンをアクティブに
+            event.target.classList.add('active');
+
+            // ページトップにスクロール
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ページ読み込み時にアニメーションを順次発火
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.fade-in-scale');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
